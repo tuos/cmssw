@@ -143,7 +143,10 @@ from Configuration.Eras.Modifier_pp_on_XeXe_2017_cff import pp_on_XeXe_2017
 #products from regular pp which does not fit the normal AOD
 for e in [pA_2016, peripheralPbPb, pp_on_XeXe_2017]:
     e.toModify( RecoJetsAOD.outputCommands, 
-                func=lambda outputCommands: outputCommands.extend(['keep *_towerMaker_*_*'])
+                func=lambda outputCommands: outputCommands.extend(['keep *_towerMaker_*_*',
+                                                                   'keep recoCentrality*_hiCentrality_*_*',
+                                                                   'keep recoClusterCompatibility*_hiClusterCompatibility_*_*'
+                                                                   ])
                 )
 
 #HI-specific products: needed in AOD, propagate to more inclusive tiers as well

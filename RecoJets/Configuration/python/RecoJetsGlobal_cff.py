@@ -31,3 +31,17 @@ _jetHighLevelReco_pA += hiFJRhoProducer
 _jetHighLevelReco_pA += hiFJGridEmptyAreaCalculator
 _jetHighLevelReco_pA += pACentrality
 pA_2016.toReplaceWith(jetHighLevelReco, _jetHighLevelReco_pA)
+
+from Configuration.Eras.Modifier_pp_on_XeXe_2017_cff import pp_on_XeXe_2017
+from RecoHI.HiCentralityAlgos.HiCentrality_cfi import hiCentrality
+from RecoHI.HiCentralityAlgos.HiClusterCompatibility_cfi import hiClusterCompatibility
+pp_on_XeXe_2017.toModify(hiCentrality, 
+                         producePixelTracks = False,
+                         srcTracks = cms.InputTag("generalTracks"),
+                         srcVertex = cms.InputTag("offlinePrimaryVertices")
+                         )
+
+_jetHighLevelReco_XeXe = jetHighLevelReco.copy()
+_jetHighLevelReco_XeXe += hiCentrality
+_jetHighLevelReco_XeXe += hiClusterCompatibility
+pp_on_XeXe_2017.toReplaceWith(jetHighLevelReco, _jetHighLevelReco_XeXe)
